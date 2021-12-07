@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PeopleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PeopleRepository::class)
@@ -12,7 +13,9 @@ class People
 {
     /**
      * @ORM\Id
+     * 
      * @ORM\GeneratedValue
+     * 
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -28,9 +31,11 @@ class People
     private $firstName;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="date")
+     * 
+     * @Assert\LessThan("150 years")
      */
-    private $age;
+    private $birthDate;
 
     public function getId(): ?int
     {
@@ -61,15 +66,16 @@ class People
         return $this;
     }
 
-    public function getAge(): ?int
+    public function getBirthDate(): ?\DateTime
     {
-        return $this->age;
+        return $this->birthDate;
     }
 
-    public function setAge(int $age): self
+    public function setBirthDate(\DateTime $birthDate): self
     {
-        $this->age = $age;
+        $this->birthDate = $birthDate;
 
         return $this;
     }
+
 }

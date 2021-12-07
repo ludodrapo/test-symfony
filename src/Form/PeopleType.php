@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\People;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +15,9 @@ class PeopleType extends AbstractType
         $builder
             ->add('name')
             ->add('firstName')
-            ->add('age')
+            ->add('birthDate', DateType::class, [
+                'widget' => 'single_text',
+            ])
         ;
     }
 
